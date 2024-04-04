@@ -75,21 +75,24 @@ function renderTaskList() {
         //dropping cards in every lane
         $("#in-progress-body").droppable({
             drop: function( event, ui ) {
-               
+                const droppedCard = ui.draggable;
+                $(this).append(droppedCard);  
             }
         });
 
 
         $("#done-body").droppable({
             drop: function( event, ui ) {
-              
+                const droppedCard = ui.draggable;
+                $(this).append(droppedCard);
             }
         });
 
 
         $("#todo-body").droppable({
             drop: function( event, ui ) {
-               
+                const droppedCard = ui.draggable;
+                $(this).append(droppedCard);
             }
         });
     });
