@@ -24,7 +24,40 @@
     <div class="text-center mb-5">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
+
+
     <!-- Todo: Create a modal with a form to add tasks -->
+    
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="formModalLabel">Add Task</h5>
+          </div>
+          <div class="modal-body">
+            <div>
+              <label for="title">Task Title</label><br>
+              <input type="text" id="title"> <br><br>
+            </div>
+            <div>
+              <label for="date">Task Due Date</label><br>
+              <input type="date" id="date"> <br><br>
+            </div>
+            <div>
+              <label for="description">Task Description</label><br>
+              <textarea id="description" rows="4" class="w-100"></textarea> <br><br>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="add-button" type="button" class="btn btn-success">Add Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+     <!--end of modal-->
+  
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
