@@ -2,6 +2,8 @@
 let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+let addTask = document.getElementById('add-button');
+
 //generates unique id per task
 function generateTaskId() {
     nextId++;
@@ -28,6 +30,24 @@ function createTaskCard(task) {
         taskList.push(task);
         localStorage.setItem('tasks', JSON.stringify(taskList));
 
+        let card = document.createElement('div');
+        card.classList.add('card');
+
+        card.innerHTML = `
+            <h4>${taskTitle}</h4>
+            <p>${taskDate}</p>
+            <p>${taskDescription}</p>
+        `;
+
+        //delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            card.remove();
+        });
+ 
+        card.appendChild(deleteButton); 
+
         //clear card input boxes after creating card
         document.getElementById('title').value = '';
         document.getElementById('date').value = '';
@@ -35,6 +55,7 @@ function createTaskCard(task) {
 
 
         $('#formModal').modal('hide');
+        document.getElementById('todo-cards').appendChild(card);
     })
 
 }
