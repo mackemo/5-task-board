@@ -60,10 +60,41 @@ function createTaskCard(task) {
 
 }
 
-// Todo: create a function to render the task list and make cards draggable
+//drag and drop cards
 function renderTaskList() {
+    $(document).ready(function() {
+        //dragging cards
+        $("#todo-cards").draggable({
+            revert: "invalid",
+            opacity: 0.5,
+            helper: "clone",
+            zIndex: 100,
+            cursorAt: {top: 25, left: 25}
+        });
+       
+        //dropping cards in every lane
+        $("#in-progress-body").droppable({
+            drop: function( event, ui ) {
+               
+            }
+        });
 
+
+        $("#done-body").droppable({
+            drop: function( event, ui ) {
+              
+            }
+        });
+
+
+        $("#todo-body").droppable({
+            drop: function( event, ui ) {
+               
+            }
+        });
+    });
 }
+
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
