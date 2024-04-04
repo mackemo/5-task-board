@@ -28,7 +28,13 @@ function createTaskCard(task) {
         taskList.push(task);
         localStorage.setItem('tasks', JSON.stringify(taskList));
 
+        //clear card input boxes after creating card
+        document.getElementById('title').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('description').value = '';
 
+
+        $('#formModal').modal('hide');
     })
 
 }
