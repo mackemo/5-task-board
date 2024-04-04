@@ -1,6 +1,8 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks"));
+let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId"));
+
+let addTask = document.getElementById('add-button');
 
 //generates unique id per task
 function generateTaskId() {
@@ -10,8 +12,51 @@ function generateTaskId() {
 };
 
 
-// Todo: create a function to create a task card
+//create a task card
 function createTaskCard(task) {
+    addTask.addEventListener('click', function() {
+        let taskTitle = document.getElementById('title').value;
+        let taskDate = document.getElementById('date').value;
+        let taskDescription = document.getElementById('description').value;
+
+        //create object for array storage
+        let task = {
+            title: taskTitle,
+            date: taskDate,
+            description: taskDescription
+        };
+
+
+        taskList.push(task);
+        localStorage.setItem('tasks', JSON.stringify(taskList));
+
+        let card = document.createElement('div');
+        card.classList.add('card');
+
+        card.innerHTML = `
+            <h4>${taskTitle}</h4>
+            <p>${taskDate}</p>
+            <p>${taskDescription}</p>
+        `;
+
+        //delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            card.remove();
+        });
+ 
+        card.appendChild(deleteButton); 
+
+        //clear card input boxes after creating card
+        document.getElementById('title').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('description').value = '';
+
+
+        $('#formModal').modal('hide');
+        document.getElementById('todo-cards').appendChild(card);
+    })
 
 }
 
