@@ -30,19 +30,20 @@ function createTaskCard(task) {
             description: taskDescription
         };
 
-
+       
         taskList.push(task);
         localStorage.setItem('tasks', JSON.stringify(taskList));
-
+       
         let card = document.createElement('div');
         card.classList.add('card');
+
 
         card.innerHTML = `
             <h4>${taskTitle}</h4>
             <p>${taskDate}</p>
             <p>${taskDescription}</p>
         `;
-
+       
         //change colors of cards based on due date
         let now = dayjs();
         if (now.isSame(taskDate, "day")) {
@@ -69,13 +70,12 @@ function createTaskCard(task) {
             card.remove();
         });
  
-        card.appendChild(deleteButton); 
+        card.appendChild(deleteButton);
 
         //clear card input boxes after creating card
         document.getElementById('title').value = '';
         document.getElementById('date').value = '';
         document.getElementById('description').value = '';
-
 
         $('#formModal').modal('hide');
         document.getElementById('todo-cards').appendChild(card);
@@ -105,10 +105,8 @@ function renderTaskList() {
 
                 // add white color
                 droppedCard.addClass("white");
-
             }
         });
-
 
         $("#todo-body").droppable({
             drop: function( event, ui ) {
@@ -118,6 +116,7 @@ function renderTaskList() {
         });
     });
 }
+
 
 //calls all functions
 $(document).ready(function () {
