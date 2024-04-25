@@ -13,7 +13,7 @@ function generateTaskId() {
 
 //initializing datepicker for task card
 $(function() {
-    $("#date").datepicker();
+    $("#date").datepicker()
 });
 
 //create a task card
@@ -42,6 +42,16 @@ function createTaskCard(task) {
             <p>${taskDate}</p>
             <p>${taskDescription}</p>
         `;
+
+        //change colors of cards based on due date
+        let now = dayjs();
+        if (now.isSame(taskDate, "day")) {
+            card.classList.add("yellow");
+        } else if (now.isBefore(taskDate, "day")) {
+            card.classList.add("white");
+        } else {
+            card.classList.add("red");
+        };
 
         // make cards draggable
         $(card).draggable({
@@ -89,6 +99,13 @@ function renderTaskList() {
             drop: function( event, ui ) {
                 const droppedCard = ui.draggable;
                 $(this).append(droppedCard);
+
+                // remove card color
+                droppedCard.removeClass("yellow red");
+
+                // add white color
+                droppedCard.addClass("white");
+
             }
         });
 
@@ -100,22 +117,6 @@ function renderTaskList() {
             }
         });
     });
-}
-
-
-// Todo: create a function to handle adding a new task
-function handleAddTask(event){
-
-}
-
-// Todo: create a function to handle deleting a task
-function handleDeleteTask(event){
-
-}
-
-// Todo: create a function to handle dropping a task into a new status lane
-function handleDrop(event, ui) {
-
 }
 
 //calls all functions
