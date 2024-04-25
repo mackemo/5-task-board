@@ -11,12 +11,11 @@ function generateTaskId() {
     return nextId;
 };
 
-
 //create a task card
 function createTaskCard(task) {
     addTask.addEventListener('click', function() {
         let taskTitle = document.getElementById('title').value;
-        let taskDate = document.getElementById('date').value;
+        let taskDate = dayjs(document.getElementById('date').value).format('MM-DD-YYYY');
         let taskDescription = document.getElementById('description').value;
 
         //create object for array storage
