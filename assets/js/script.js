@@ -11,6 +11,11 @@ function generateTaskId() {
     return nextId;
 };
 
+//initializing datepicker for task card
+$(function() {
+    $("#date").datepicker();
+});
+
 //create a task card
 function createTaskCard(task) {
     addTask.addEventListener('click', function() {
