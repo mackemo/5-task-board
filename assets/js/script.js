@@ -39,6 +39,15 @@ function createTaskCard(task) {
             <p>${taskDescription}</p>
         `;
 
+        // make cards draggable
+        $(card).draggable({
+            revert: "invalid",
+            opacity: 0.5,
+            helper: "clone",
+            zIndex: 100,
+            cursorAt: {top: 25, left: 25}
+        });
+
         //delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -60,18 +69,9 @@ function createTaskCard(task) {
 
 }
 
-//drag and drop cards
+//drop cards
 function renderTaskList() {
     $(document).ready(function() {
-        //dragging cards
-        $("#todo-cards").draggable({
-            revert: "invalid",
-            opacity: 0.5,
-            helper: "clone",
-            zIndex: 100,
-            cursorAt: {top: 25, left: 25}
-        });
-       
         //dropping cards in every lane
         $("#in-progress-body").droppable({
             drop: function( event, ui ) {
