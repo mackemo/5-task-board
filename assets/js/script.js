@@ -98,6 +98,32 @@ function handleAddTask() {
     renderTaskList();
 }
 
+function renderTaskList() {
+    const todoLane =  document.getElementById('todo-cards');
+    const progressLane = document.getElementById('in-progress-cards');
+    const doneLane = document.getElementById('done-cards');
+
+    todoLane.textContent = '';
+    progressLane.textContent = '';
+    doneLane.textContent = '';
+
+
+   for (let index = 0; index < taskList.length; index++) {
+    const taskItem = taskList[index];
+    const card = createTaskCard(taskItem);
+   
+        if (taskItem.status === 'to-do') {
+        todoLane.appendChild(card);
+        }   
+        if (taskItem.status === 'in-progress') {
+        progressLane.appendChild(card);
+        }
+        if (taskItem.status === 'done') {
+        doneLane.appendChild(card);
+        }
+    };
+};
+
 
 function handleDrop(event, ui) {
     const droppedCard = ui.draggable;
