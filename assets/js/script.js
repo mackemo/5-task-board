@@ -99,55 +99,27 @@ function handleAddTask() {
 }
 
 
-//drop cards
-function renderTaskList() {
-    $(document).ready(function() {
-        //dropping cards in every lane
-        $("#in-progress-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);  
-            }
-        });
+function handleDrop(event, ui) {
+    const droppedCard = ui.draggable;
+    $(this).append(droppedCard);  
+
+    if (droppedCard.status === 'to-do') {
+    // remove card color
+     droppedCard.removeClass("yellow red");
+     // add white color
+     droppedCard.addClass("white");
+    }; 
+};
 
 
-
-
-        $("#done-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);
-
-
-                // remove card color
-                droppedCard.removeClass("yellow red");
-
-
-                // add white color
-                droppedCard.addClass("white");
-
-
-            }
-        });
-
-
-
-
-        $("#todo-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);
-            }
-        });
-    });
-}
-
-
-//calls all functions
 $(document).ready(function () {
-    generateTaskId();
-    createTaskCard();
+    $(".lane").droppable({
+        drop: handleDrop
+    });
+
+    $("#date").datepicker()
     renderTaskList();
+    addTask.addEventListener('click', handleAddTask)
 });
 
 
