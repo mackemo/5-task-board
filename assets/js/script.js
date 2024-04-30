@@ -4,6 +4,7 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 let addTask = document.getElementById('add-button');
 
+
 //generates unique id per task
 function generateTaskId() {
     nextId++;
@@ -11,29 +12,9 @@ function generateTaskId() {
     return nextId;
 };
 
-//initializing datepicker for task card
-$(function() {
-    $("#date").datepicker()
-});
-
 //create a task card
 function createTaskCard(task) {
-    addTask.addEventListener('click', function() {
-        let taskTitle = document.getElementById('title').value;
-        let taskDate = dayjs(document.getElementById('date').value).format('MM-DD-YYYY');
-        let taskDescription = document.getElementById('description').value;
-
-        //create object for array storage
-        let task = {
-            title: taskTitle,
-            date: taskDate,
-            description: taskDescription
-        };
-
-       
-        taskList.push(task);
-        localStorage.setItem('tasks', JSON.stringify(taskList));
-       
+    
         let card = document.createElement('div');
         card.classList.add('card');
 
@@ -54,6 +35,7 @@ function createTaskCard(task) {
             card.classList.add("red");
         };
 
+
         // make cards draggable
         $(card).draggable({
             revert: "invalid",
@@ -62,6 +44,7 @@ function createTaskCard(task) {
             zIndex: 100,
             cursorAt: {top: 25, left: 25}
         });
+
 
         //delete button
         const deleteButton = document.createElement('button');
@@ -72,16 +55,49 @@ function createTaskCard(task) {
  
         card.appendChild(deleteButton);
 
-        //clear card input boxes after creating card
-        document.getElementById('title').value = '';
-        document.getElementById('date').value = '';
-        document.getElementById('description').value = '';
 
-        $('#formModal').modal('hide');
-        document.getElementById('todo-cards').appendChild(card);
-    })
+        
+
+
+
+
+        
+    
+
 
 }
+
+//handle add task
+function handleAddTask() {
+    let taskTitle = document.getElementById('title').value;
+    let taskDate = dayjs(document.getElementById('date').value).format('MM-DD-YYYY');
+    let taskDescription = document.getElementById('description').value;
+
+
+    //create object for array storage
+    let task = {
+        title: taskTitle,
+        date: taskDate,
+        description: taskDescription,
+        id: generateTaskId(),
+        status: 'to-do'
+    };
+
+
+   
+    taskList.push(task);
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+
+    //clear card input boxes after creating card
+    document.getElementById('title').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('description').value = '';
+
+    $('#formModal').modal('hide');
+     
+    renderTaskList();
+}
+
 
 //drop cards
 function renderTaskList() {
@@ -95,18 +111,27 @@ function renderTaskList() {
         });
 
 
+
+
         $("#done-body").droppable({
             drop: function( event, ui ) {
                 const droppedCard = ui.draggable;
                 $(this).append(droppedCard);
 
+
                 // remove card color
                 droppedCard.removeClass("yellow red");
 
+
                 // add white color
                 droppedCard.addClass("white");
+
+
             }
         });
+
+
+
 
         $("#todo-body").droppable({
             drop: function( event, ui ) {
@@ -124,3 +149,8 @@ $(document).ready(function () {
     createTaskCard();
     renderTaskList();
 });
+
+
+
+
+
