@@ -4,6 +4,7 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 let addTask = document.getElementById('add-button');
 
+
 //generates unique id per task
 function generateTaskId() {
     nextId++;
@@ -11,38 +12,19 @@ function generateTaskId() {
     return nextId;
 };
 
-//initializing datepicker for task card
-$(function() {
-    $("#date").datepicker()
-});
-
 //create a task card
 function createTaskCard(task) {
-    addTask.addEventListener('click', function() {
-        let taskTitle = document.getElementById('title').value;
-        let taskDate = dayjs(document.getElementById('date').value).format('MM-DD-YYYY');
-        let taskDescription = document.getElementById('description').value;
-
-        //create object for array storage
-        let task = {
-            title: taskTitle,
-            date: taskDate,
-            description: taskDescription
-        };
-
-
-        taskList.push(task);
-        localStorage.setItem('tasks', JSON.stringify(taskList));
-
+    
         let card = document.createElement('div');
         card.classList.add('card');
+
 
         card.innerHTML = `
             <h4>${taskTitle}</h4>
             <p>${taskDate}</p>
             <p>${taskDescription}</p>
         `;
-
+       
         //change colors of cards based on due date
         let now = dayjs();
         if (now.isSame(taskDate, "day")) {
@@ -53,6 +35,7 @@ function createTaskCard(task) {
             card.classList.add("red");
         };
 
+
         // make cards draggable
         $(card).draggable({
             revert: "invalid",
@@ -62,6 +45,7 @@ function createTaskCard(task) {
             cursorAt: {top: 25, left: 25}
         });
 
+
         //delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -69,59 +53,102 @@ function createTaskCard(task) {
             card.remove();
         });
  
-        card.appendChild(deleteButton); 
-
-        //clear card input boxes after creating card
-        document.getElementById('title').value = '';
-        document.getElementById('date').value = '';
-        document.getElementById('description').value = '';
+        card.appendChild(deleteButton);
 
 
-        $('#formModal').modal('hide');
-        document.getElementById('todo-cards').appendChild(card);
-    })
+        
+
+
+
+
+        
+    
+
 
 }
 
-//drop cards
-function renderTaskList() {
-    $(document).ready(function() {
-        //dropping cards in every lane
-        $("#in-progress-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);  
-            }
-        });
+//handle add task
+function handleAddTask() {
+    let taskTitle = document.getElementById('title').value;
+    let taskDate = dayjs(document.getElementById('date').value).format('MM-DD-YYYY');
+    let taskDescription = document.getElementById('description').value;
 
 
-        $("#done-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);
-
-                // remove card color
-                droppedCard.removeClass("yellow red");
-
-                // add white color
-                droppedCard.addClass("white");
-
-            }
-        });
+    //create object for array storage
+    let task = {
+        title: taskTitle,
+        date: taskDate,
+        description: taskDescription,
+        id: generateTaskId(),
+        status: 'to-do'
+    };
 
 
-        $("#todo-body").droppable({
-            drop: function( event, ui ) {
-                const droppedCard = ui.draggable;
-                $(this).append(droppedCard);
-            }
-        });
-    });
-}
+   
+    taskList.push(task);
+    localStorage.setItem('tasks', JSON.stringify(taskList));
 
-//calls all functions
-$(document).ready(function () {
-    generateTaskId();
-    createTaskCard();
+    //clear card input boxes after creating card
+    document.getElementById('title').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('description').value = '';
+
+    $('#formModal').modal('hide');
+     
     renderTaskList();
+}
+
+function renderTaskList() {
+    const todoLane =  document.getElementById('todo-cards');
+    const progressLane = document.getElementById('in-progress-cards');
+    const doneLane = document.getElementById('done-cards');
+
+    todoLane.textContent = '';
+    progressLane.textContent = '';
+    doneLane.textContent = '';
+
+
+   for (let index = 0; index < taskList.length; index++) {
+    const taskItem = taskList[index];
+    const card = createTaskCard(taskItem);
+   
+        if (taskItem.status === 'to-do') {
+        todoLane.appendChild(card);
+        }   
+        if (taskItem.status === 'in-progress') {
+        progressLane.appendChild(card);
+        }
+        if (taskItem.status === 'done') {
+        doneLane.appendChild(card);
+        }
+    };
+};
+
+
+function handleDrop(event, ui) {
+    const droppedCard = ui.draggable;
+    $(this).append(droppedCard);  
+
+    if (droppedCard.status === 'to-do') {
+    // remove card color
+     droppedCard.removeClass("yellow red");
+     // add white color
+     droppedCard.addClass("white");
+    }; 
+};
+
+
+$(document).ready(function () {
+    $(".lane").droppable({
+        drop: handleDrop
+    });
+
+    $("#date").datepicker()
+    renderTaskList();
+    addTask.addEventListener('click', handleAddTask)
 });
+
+
+
+
+
