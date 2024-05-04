@@ -10,7 +10,7 @@ The fifth challenge assignment from a bootcamp where the task was to create a si
 
 ## Process
 
-The process included adding a modal for inputting task title, due date and description for each task. Day.js was used for the datepicker. When the add task button is clicked, the task card automatically pops into the todo column. Draggable and Droppable events were created to move the task cards bewteen three columns: To-do, In Progress, and Done. A delete button was added to each card to delete a card. The properties for each card is saved in localStorage. When a task is nearing a deadline, it is yellow, or red for overdue.
+The process included adding a modal for inputting task title, due date and description for each task. Day.js was used for the datepicker. When the add task button is clicked, the task card automatically pops into the todo column. Draggable and Droppable events were created to move the task cards bewteen three columns: To-do, In Progress, and Done. A delete button was added to each card to delete a card. The properties for each card is saved in localStorage. When a task is nearing a deadline, it is yellow, or red for overdue. Upon page, refresh, the cards stay in their respective columns.
 
 
 ## Links
