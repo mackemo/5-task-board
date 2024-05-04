@@ -5,8 +5,7 @@
 
 The fifth challenge assignment from a bootcamp where the task was to create a simple task board application. It featured dynamically updated HTML and CSS powered by jQuery.
 
-<img src=""/>
-
+<img src="./assets/images/image.png"/>
 
 ## Process
 
