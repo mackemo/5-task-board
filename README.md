@@ -5,6 +5,17 @@
 
 The fifth challenge assignment from a bootcamp where the task was to create a simple task board application. It featured dynamically updated HTML and CSS powered by jQuery.
 
+## Table of Content
+  -[Description](#Description)
+  -[Process](#Process)
+  -[Links](#Links)
+  -[Installation](#Installation)
+  -[Usage](#Usage)
+  -[Licenses](#Licenses)
+  -[Contribution](#Contribution)
+  -[Acknowledgement](#Acknowledgement)
+  -[Questions](#Questions)
+
 <img src="./assets/images/image.png"/>
 
 ## Process
@@ -23,7 +34,7 @@ https://github.com/mackemo/5-task-board
 
 ## Installation
 
-N/A
+To install this application, copy the ssh key from my github repo and clone it into your respository.
 
 
 ## Usage
@@ -31,14 +42,14 @@ N/A
 This site was a practice assignment for bootcamp students but can be used to see how a simple website can be created by inspecting the webpage.
 
 
-## Credits
-
-N/A
-
-
 ## License
 
 N/A
+
+
+## Contribution
+  
+Contact me by email provided in Questions section.
 
 
 ## Acknowledgement
@@ -49,4 +60,12 @@ Project was done by the knowledge learned from bootcamp instructor John and by o
 -tutoring from bootcamp spot
 https://day.js.org/docs/en/query/is-before
 https://jqueryui.com/datepicker/#default
+
+
+## Questions
+
+Contact with questions at:
+  
+Email: mackenzielmoore14@gmail.com
+Click [here](https://github.com/mackemo) for Github account.
 
